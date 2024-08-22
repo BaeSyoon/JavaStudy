@@ -1,0 +1,12 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class Calculator {
+	 public static void main(String[] args) {
+		 JFrame frame = new JFrame("계산기");
+		// frame.setSize(400,500);
+		 
+		 frame.setVisible(true);
+	 }
+}

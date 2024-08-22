@@ -1,0 +1,13 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class Calculator {
+	 public static void main(String[] args) {
+		 JFrame frame = new JFrame("계산기");
+		 frame.setSize(400,500);
+		 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 창을 닫아도 JVM에 남아 가동하기 때문에 메모리 과사용
+		 frame.setLayout(null); // 레이아웃 매니저 설정 (null은 직접 배치)
+		 frame.setVisible(true);
+	 }
+}

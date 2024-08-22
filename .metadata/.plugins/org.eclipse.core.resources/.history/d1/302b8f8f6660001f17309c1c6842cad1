@@ -1,0 +1,161 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class Calculator implements ActionListener {
+	
+	JFrame f;
+    JTextField t;
+    JButton[] numb = new JButton[10];
+    JButton[] func = new JButton[8];
+    JPanel p;
+    
+	Font font = new Font("Arial", Font.BOLD, 30);
+	
+	double num1 = 0, num2 = 0, result = 0;
+	char operator = '\0';
+	
+	public Calculator() {
+		
+		 // 프레임
+		 f = new JFrame("계산기");
+		 f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		 f.setSize(420, 550);
+		 f.setLayout(null);
+		 
+		 // 텍스트 필드
+		 t = new JTextField();
+		 t.setBounds(50, 25, 300, 50);
+		 t. setFont(font);
+		 t.setEditable(false);
+		 f.add(t);
+		 
+		 // 버튼
+		 numb = new JButton[10];
+		 func = new JButton[8]; // add, sub, mul, div, dec, equ, del, clr;
+		 func[0] = new JButton("+");
+		 func[1] = new JButton("-");
+		 func[2] = new JButton("*");
+		 func[3] = new JButton("/");
+		 func[4] = new JButton(".");
+		 func[5] = new JButton("=");
+		 func[6] = new JButton("Del");
+		 func[7] = new JButton("C");
+		 
+		 for(int i = 0; i< 8; i++) {
+			 func[i].addActionListener(this);
+			 func[i].setFont(font);
+			 func[i].setFocusable(false);
+		 }
+		 
+		 for(int i = 0; i < 10; i++) {
+			 numb[i] = new JButton(String.valueOf(i));
+			 numb[i].addActionListener(this);
+			 numb[i].setFont(font);
+			 numb[i].setFocusable(false);
+		 }
+		 
+		 func[6].setBounds(150, 430, 145, 50); // del
+		 func[7].setBounds(50, 430, 95, 50); // clr
+		 f.add(func[6]);
+		 f.add(func[7]);
+		 
+		 // 판넬
+		 p = new JPanel();
+		 p.setBounds(50, 100, 300, 300);
+		 p.setLayout(new GridLayout(4, 4, 10,10));
+		 
+		 for(int k = 0; k < 3; k++) {
+			 for(int i = 1 ; i <= 3; i++) {
+				 p.add(numb[k * 3 + i]);
+			 }
+			 p.add(func[k]);
+		 }
+		 p.add(func[4]); // dec
+	     p.add(numb[0]);
+	     p.add(func[5]); // equ
+	     p.add(func[3]); // div
+		 
+		 f.add(p);
+		 f.setVisible(true);
+			 
+	 }
+	
+	 public static void main(String[] args) {
+		 new Calculator();
+	 }	 
+	 
+		 
+	 // ActionListener는 버튼 클릭 같은 사용자 동작(이벤트)에 반응하여 특정 작업을 수행하도록 합니다.
+	 @Override
+    public void actionPerformed(ActionEvent e) {
+	
+        for (int i = 0; i < 10; i++) {
+            if (e.getSource() == numb[i]) {
+                t.setText(t.getText().concat(String.valueOf(i)));
+            }
+        }
+        
+        if (e.getSource() == func[0]) {
+            num1 = Double.parseDouble(t.getText());
+            operator = '+';
+            t.setText("");
+        }
+        if (e.getSource() == func[1]) {
+            num1 = Double.parseDouble(t.getText());
+            operator = '-';
+            t.setText("");
+        }
+        if (e.getSource() == func[2]) {
+            num1 = Double.parseDouble(t.getText());
+            operator = '*';
+            t.setText("");
+        }
+        if (e.getSource() == func[3]) {
+            num1 = Double.parseDouble(t.getText());
+            operator = '/';
+            t.setText("");
+        }
+        if (e.getSource() == func[4]) {
+            t.setText(t.getText().concat("."));
+        }
+        if (e.getSource() == func[5]) {
+            num2 = Double.parseDouble(t.getText());
+
+            switch (operator) {
+                case '+':
+                    result = num1 + num2;
+                    break;
+                case '-':
+                    result = num1 - num2;
+                    break;
+                case '*':
+                    result = num1 * num2;
+                    break;
+                case '/':
+                    result = num1 / num2;
+                    break;
+            }
+            t.setText(String.valueOf(result));
+            num1 = result;
+            operator = '\0';
+        }
+        if (e.getSource() == func[6]) { // del
+            String string = t.getText();
+            t.setText("");
+            for (int i = 0; i < string.length() - 1; i++) {
+                t.setText(t.getText() + string.charAt(i));
+            }
+        }
+        if (e.getSource() == func[7]) {
+            t.setText("");
+            // num1 = 0;
+           // num2 = 0;
+            operator = '\0';
+        }
+	 }
+	    
+		 
+		 
+	 
+}

@@ -1,0 +1,21 @@
+import java.awt.*;
+import javax.swing.*;
+
+public class Calculator {
+	 public static void main(String[] args) {
+		 
+		 JFrame frame = new JFrame("계산기");
+		 frame.setSize(400, 500);  // 창 크기 설정
+		 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  // 창을 닫아도 JVM에 남아 가동하기 때문에 메모리 과사용
+		 frame.setLayout(null);  // 레이아웃 매니저 설정 (null은 직접 배치)
+		 frame.setVisible(true);  // 창을 화면에 표시
+
+		 JTextField textField = new JTextField();
+		 textField.setBounds(10,10,300,50);  // 위치와 크기 설정
+		 textField.setFont(new Font("Arial", Font.BOLD, 30));  // 글꼴 설정
+		 textField.setEditable(false);  // 사용자 입력 불가 (결과 표시용)
+		 frame.add(textField);  // JFrame에 추가
+
+	 
+	 }
+}
